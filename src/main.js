@@ -8,11 +8,16 @@ const SPEED = 480;
 kaplay();
 
 // load assets
-loadSprite("flappy", "sprites/flappy.png");
-
+loadSprite("flappy", "sprites/67-bird.png");
+loadSprite("bg", "sprites/67-land-BG.png")
 scene("game", () => {
     // define gravity
     setGravity(2700);
+    
+    add([
+        sprite("bg"),
+        scale(3.2)
+    ])
 
     // add a game object to screen
     const player = add([
@@ -21,7 +26,7 @@ scene("game", () => {
         scale(3),
         pos(80, 40),
         anchor("center"),
-        area({scale: 0.8}),
+        area({scale: 0.5}),
         body(),
          
     ]);
@@ -36,6 +41,8 @@ scene("game", () => {
         body({ isStatic: true }),
         color(127, 200, 255),
     ]);
+
+    
 
     function jump() {
         if (player.isGrounded()) {
