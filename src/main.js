@@ -2,16 +2,20 @@ import kaplay from "kaplay";
 
 const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 900;
-const SPEED = 480;
+let SPEED = 480;
 
 // initialize context
 kaplay(
     {
         width: 1920,
-        height: 1080,
+        height: 1080, 
         letterbox: true
     }
 );
+
+const increaseSpeed = setInterval(() => {
+    SPEED += 5;
+}, 1000)
 
 // load assets
 loadSprite("flappy", "sprites/67-bird.png");
