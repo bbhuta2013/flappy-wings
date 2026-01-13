@@ -5,7 +5,13 @@ const JUMP_FORCE = 900;
 const SPEED = 480;
 
 // initialize context
-kaplay();
+kaplay(
+    {
+        width: 1920,
+        height: 1080,
+        letterbox: true
+    }
+);
 
 // load assets
 loadSprite("flappy", "sprites/67-bird.png");
@@ -16,7 +22,7 @@ scene("game", () => {
     
     add([
         sprite("bg"),
-        scale(3.2)
+        scale(4)
     ])
 
     // add a game object to screen
