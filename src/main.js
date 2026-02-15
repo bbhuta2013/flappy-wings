@@ -27,7 +27,7 @@ scene("game", () => {
 
     // define gravity
     setGravity(2700);
-    
+
     add([
         sprite("bg"),
         scale(4)
@@ -40,9 +40,9 @@ scene("game", () => {
         scale(3),
         pos(80, 40),
         anchor("center"),
-        area({scale: 0.5}),
+        area({ scale: 0.5 }),
         body(),
-         
+
     ]);
 
     // floor
@@ -56,7 +56,7 @@ scene("game", () => {
         color(127, 200, 255),
     ]);
 
-    
+
 
     function jump() {
         if (player.isGrounded()) {
