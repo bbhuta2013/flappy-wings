@@ -9,7 +9,7 @@ let SPEED = 0;
 kaplay(
     {
         width: 1920,
-        height: 1080, 
+        height: 1080,
         letterbox: true
     }
 );
