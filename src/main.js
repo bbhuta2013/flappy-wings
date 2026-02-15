@@ -99,12 +99,14 @@ scene("game", () => {
     // keep track of score
     let score = 0;
 
-    const scoreLabel = add([text(score), pos(24, 24)]);
+    const scoreLabel = add([text(score), pos(1600, 24)]);
+    const speedLabel = add([text(SPEED), pos(1600, 90)]);
 
     // increment score every frame
     onUpdate(() => {
         score++;
-        scoreLabel.text = score;
+        scoreLabel.text = "Score: " + score;
+        speedLabel.text = "Speed: " + SPEED;
     });
 });
 
