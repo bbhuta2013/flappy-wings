@@ -14,14 +14,17 @@ kaplay(
     }
 );
 
-const increaseSpeed = setInterval(() => {
-    SPEED += 5;
-}, 1000)
+let increaseSpeed;
 
 // load assets
 loadSprite("flappy", "sprites/67-bird.png");
 loadSprite("bg", "sprites/67-land-BG.png")
 scene("game", () => {
+    SPEED = START_SPEED;
+    increaseSpeed = setInterval(() => {
+        SPEED += 10;
+    }, 1000)
+
     // define gravity
     setGravity(2700);
     
@@ -106,6 +109,8 @@ scene("game", () => {
 });
 
 scene("lose", (score) => {
+    clearInterval(increaseSpeed);
+
     add([
         sprite("flappy"),
         pos(width() / 2, height() / 2 - 80),
