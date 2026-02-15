@@ -2,7 +2,8 @@ import kaplay from "kaplay";
 
 const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 900;
-let SPEED = 480;
+const START_SPEED = 480;
+let SPEED = 0;
 
 // initialize context
 kaplay(
