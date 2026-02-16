@@ -106,7 +106,7 @@ scene("game", () => {
     onUpdate(() => {
         score++;
         scoreLabel.text = "Score: " + score;
-        speedLabel.text = "Speed: " + SPEED;
+        speedLabel.text = "Speed: " + ((SPEED - 480) * 2);
     });
 });
 
