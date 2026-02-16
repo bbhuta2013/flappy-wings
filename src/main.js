@@ -1,11 +1,15 @@
 import kaplay from "kaplay";
 
+// Define constants
 const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 900;
 const START_SPEED = 480;
-let speed = 0;
 
-// initialize context
+// Define non-constant variables
+let speed = 0;
+let increaseSpeed;
+
+// Initialize game context
 kaplay(
     {
         width: 1920,
@@ -14,38 +18,39 @@ kaplay(
     }
 );
 
-let increaseSpeed;
-
-// load assets
+// Load assets
 loadSprite("flappy", "sprites/67-bird.png");
 loadSprite("bg", "sprites/67-land-BG.png")
+
+// Define game scene
 scene("game", () => {
-    speed = START_SPEED;
+    speed = START_SPEED; // Reset speed to starting speed (constant)
+
+    // Start interval timer to increase speed every second
     increaseSpeed = setInterval(() => {
         speed += 10;
     }, 1000)
 
-    // define gravity
+    // Define gravity (library defined)
     setGravity(2700);
 
+    // Add background to screen and scale it up
     add([
         sprite("bg"),
         scale(4)
     ])
 
-    // add a game object to screen
+    // Add the player object to scene
     const player = add([
-        // list of components
         sprite("flappy"),
         scale(3),
         pos(80, 40),
         anchor("center"),
         area({ scale: 0.5 }),
-        body(),
-
+        body()
     ]);
 
-    // floor
+    // Add floor to the scene
     add([
         rect(width(), FLOOR_HEIGHT),
         outline(4),
@@ -56,20 +61,20 @@ scene("game", () => {
         color(127, 200, 255),
     ]);
 
-
-
+    // Define jump function (only when on ground)
     function jump() {
         if (player.isGrounded()) {
             player.jump(JUMP_FORCE);
         }
     }
 
-    // jump when user press space
+    // Define jump when user press space
     onKeyPress("space", jump);
     onClick(jump);
 
+    // Function to spawn trees
     function spawnTree() {
-        // add tree obj
+        // Define single tree object
         add([
             rect(48, rand(32, 96)),
             area(),
@@ -80,15 +85,14 @@ scene("game", () => {
             move(LEFT, speed),
             "tree",
         ]);
-
         // wait a random amount of time to spawn next tree
         wait(rand(0.5, 1.5), spawnTree);
     }
 
-    // start spawning trees
+    // Start spawning trees
     spawnTree();
 
-    // lose if player collides with any game obj with tag "tree"
+    // Define lose condition when player collides with tree
     player.onCollide("tree", () => {
         // go to "lose" scene and pass the score
         go("lose", score);
@@ -99,10 +103,11 @@ scene("game", () => {
     // keep track of score
     let score = 0;
 
+    // labels to display score and speed
     const scoreLabel = add([text(score), pos(1600, 24)]);
     const speedLabel = add([text(speed), pos(1600, 90)]);
 
-    // increment score every frame
+    // increment score and speed every frame
     onUpdate(() => {
         score++;
         scoreLabel.text = "Score: " + score;
@@ -110,9 +115,12 @@ scene("game", () => {
     });
 });
 
+// Define scene to show when lose the game
 scene("lose", (score) => {
+    // Stop increasing speed when lose
     clearInterval(increaseSpeed);
 
+    // Put player in the middle of the screen
     add([
         sprite("flappy"),
         pos(width() / 2, height() / 2 - 80),
@@ -133,4 +141,5 @@ scene("lose", (score) => {
     onClick(() => go("game"));
 });
 
+// Run game!
 go("game");
