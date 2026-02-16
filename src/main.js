@@ -8,6 +8,7 @@ const START_SPEED = 480;
 // Define non-constant variables
 let speed = 0;
 let increaseSpeed;
+let highScore = 0;
 
 // Initialize game context
 kaplay({
@@ -101,12 +102,17 @@ scene("game", () => {
   // labels to display score and speed
   const scoreLabel = add([text(score), pos(1600, 24)]);
   const speedLabel = add([text(speed), pos(1600, 90)]);
+  const highScoreLabel = add([text("High Score: " + highScore), pos(1600, 150)]);
 
   // increment score and speed every frame
   onUpdate(() => {
     score++;
     scoreLabel.text = "Score: " + score;
     speedLabel.text = "Speed: " + (speed - 480) * 2;
+    if (score > highScore) {
+      highScore = score;
+      highScoreLabel.text = "High Score: " + highScore;
+    }
   });
 });
 
