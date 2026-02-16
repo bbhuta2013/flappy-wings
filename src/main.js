@@ -102,7 +102,10 @@ scene("game", () => {
   // labels to display score and speed
   const scoreLabel = add([text(score), pos(1600, 24)]);
   const speedLabel = add([text(speed), pos(1600, 90)]);
-  const highScoreLabel = add([text("High Score: " + highScore), pos(1600, 150)]);
+  const highScoreLabel = add([
+    text("High Score: " + highScore),
+    pos(1600, 150),
+  ]);
 
   // increment score and speed every frame
   onUpdate(() => {
