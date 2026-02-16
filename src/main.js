@@ -3,7 +3,7 @@ import kaplay from "kaplay";
 const FLOOR_HEIGHT = 48;
 const JUMP_FORCE = 900;
 const START_SPEED = 480;
-let SPEED = 0;
+let speed = 0;
 
 // initialize context
 kaplay(
@@ -20,9 +20,9 @@ let increaseSpeed;
 loadSprite("flappy", "sprites/67-bird.png");
 loadSprite("bg", "sprites/67-land-BG.png")
 scene("game", () => {
-    SPEED = START_SPEED;
+    speed = START_SPEED;
     increaseSpeed = setInterval(() => {
-        SPEED += 10;
+        speed += 10;
     }, 1000)
 
     // define gravity
@@ -77,7 +77,7 @@ scene("game", () => {
             pos(width(), height() - FLOOR_HEIGHT),
             anchor("botleft"),
             color(255, 180, 255),
-            move(LEFT, SPEED),
+            move(LEFT, speed),
             "tree",
         ]);
 
@@ -100,13 +100,13 @@ scene("game", () => {
     let score = 0;
 
     const scoreLabel = add([text(score), pos(1600, 24)]);
-    const speedLabel = add([text(SPEED), pos(1600, 90)]);
+    const speedLabel = add([text(speed), pos(1600, 90)]);
 
     // increment score every frame
     onUpdate(() => {
         score++;
         scoreLabel.text = "Score: " + score;
-        speedLabel.text = "Speed: " + ((SPEED - 480) * 2);
+        speedLabel.text = "Speed: " + ((speed - 480) * 2);
     });
 });
 
